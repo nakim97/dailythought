@@ -1,27 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
+<% layout('/layouts/boilerplate')%>
+<h1><%= blog.title %></h1>
+<h2><%= blog.mood %></h2>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Thought</title>
-</head>
+<p> <a href="/blogs/<%=blog._id%>/edit">Edit</a>
+</p>
+<p>
+    <form action="/blogs/<%=blog._id%>?_method=DELETE" method="POST">
+        <button>Delete</button>
+    </form>
 
-<body>
-    <h1><%= blog.title %></h1>
-    <h2><%= blog.mood %></h2>
-
-    <p> <a href="/blogs/<%=blog._id%>/edit">Edit</a>
-    </p>
-    <p>
-        <form action="/blogs/<%=blog._id%>?_method=DELETE" method="POST">
-            <button>Delete</button>
-        </form>
-
-        <footer>
-            <a href="/blogs">All Thoughts</a>
-        </footer>
-</body>
-
-</html>
+    <footer>
+        <a href="/blogs">All Thoughts</a>
+    </footer>

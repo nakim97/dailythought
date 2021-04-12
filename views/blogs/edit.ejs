@@ -1,27 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Your Thought</title>
-</head>
-
-<body>
-    <h1>Edit Your Thoughts</h1>
-    <form action="/blogs/<%=blog._id%>?_method=PUT" method="POST">
-        <div>
-            <label for="title">Title</label>
-            <input type="text" id="title" name="blog[title]" value="<%=blog.title %>">
-        </div>
-        <div>
-            <label for="mood">Mood</label>
-            <input type="text" id="mood" name="blog[mood]" value="<%= blog.mood%>">
-        </div>
-        <button>Update Thought</button>
-    </form>
-    <a href="/blogs/<%= blog._id%>">Back To All thoughts</a>
-
-</body>
-
-</html>
+<% layout('/layouts/boilerplate')%>
+<h1>Edit Your Thoughts</h1>
+<form action="/blogs/<%=blog._id%>?_method=PUT" method="POST">
+    <div>
+        <label for="title">Title</label>
+        <input type="text" id="title" name="blog[title]" value="<%=blog.title %>">
+    </div>
+    <div>
+        <label for="mood">Mood</label>
+        <input type="text" id="mood" name="blog[mood]" value="<%= blog.mood%>">
+    </div>
+    <button>Update Thought</button>
+</form>
+<a href="/blogs/<%= blog._id%>">Back To All thoughts</a>
