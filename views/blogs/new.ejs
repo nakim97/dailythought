@@ -1,13 +1,28 @@
-<% layout('/layouts/boilerplate')%>
-<form action="/blogs" method="POST">
-    <div>
-        <label for="title">Title</label>
-        <input type="text" id="title" name="blog[title]">
+<% layout('layouts/boilerplate')%>
+<div class="row">
+    <h1 class="text-center">New Thought</h1>
+    <div class="col-6 offset-3">
+        <form action="/blogs" method="POST">
+            <div class="mb-3">
+                <label class="form-label" for="title">Title</label>
+                <input class="form-control" type="text" id="title" name="blog[title]">
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="mood">Mood</label>
+                <input class="form-control" type="text" id="location" name="blog[mood]">
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="image">Image Url</label>
+                <input class="form-control" type="text" id="image" name="blog[image]">
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="description">Description</label>
+                <textarea class="form-control" type="text" id="description" name="blog[description]"></textarea>
+            </div>
+            <div class="mb-3">
+                <button class="btn btn-success">Add Thought</button>
+            </div>
+        </form>
+        <a href="/blogs">All Thoughts</a>
     </div>
-    <div>
-        <label for="mood">Mood</label>
-        <input type="text" id="mood" name="blog[mood]">
-    </div>
-    <button>Add Thought</button>
-</form>
-<a href="/blogs">All Thoughts</a>
+</div>
