@@ -2,27 +2,36 @@
 <div class="row">
     <h1 class="text-center">Edit Thought</h1>
     <div class="col-6 offset-3">
-        <form action="/blogs/<%=blog._id%>?_method=PUT" method="POST">
+        <form action="/blogs/<%=blog._id%>?_method=PUT" method="POST" novalidate class="validated-form">
             <div class="mb-3">
                 <label class="form-label" for="title">Title</label>
-                <input class="form-control" type="text" id="title" name="blog[title]"
-                    value="<%=blog.title %>">
+                <input class="form-control" type="text" id="title" name="blog[title]" value="<%=blog.title %>" required>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
             </div>
             <div class="mb-3">
                 <label class="form-label" for="image">Image Url</label>
-                <input class="form-control" type="text" id="image" name="blog[image]"
-                    value="<%=blog.image %>">
+                <input class="form-control" type="text" id="image" name="blog[image]" value="<%=blog.image %>" required>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
             </div>
             <div class="mb-3">
                 <label class="form-label" for="mood">Mood</label>
-                <input class="form-control" type="text" id="mood" name="blog[mood]"
-                    value="<%=blog.mood %>">
+                <input class="form-control" type="text" id="mood" name="blog[mood]" value="<%=blog.mood %>" required>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
             </div>
 
             <div class="mb-3">
                 <label class="form-label" for="description">Description</label>
-                <textarea class="form-control" type="text" id="description"
-                    name="blog[description]"><%=blog.description%></textarea>
+                <textarea class="form-control" type="text" id="description" name="blog[description]"
+                    required><%=blog.description%></textarea>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
             </div>
             <div class="mb-3">
                 <button class="btn btn-info">Update Thought</button>

@@ -1,25 +1,25 @@
 <% layout('layouts/boilerplate')%>
 
-<h1>All Thoughts</h1>
-<div>
-    <a href="/blogs/new">Add Your Thought</a>
-</div>
-<% for (let blog of blogs){%>
-<div class="card" mb-3>
-    <div class="row">
-        <div class="col-md-4">
-            <img class="img-fluid" alt="" src="<%=blog.image%>">
-        </div>
-        <div class="col-md-8">
+<div class="row">
+    <div class="col-6 offset-3">
+        <div class="card mb-3">
+            <img src="<%= blog.image%>" class="card-img-top" alt="...">
             <div class="card-body">
-                <h5 class="card-title"><%= blog.title %> </h5>
-                <p class="card-text"><%= blog.description %></p>
-                <p class="card-text">
-                    <small class="text-muted"><%= blog.mood%></small>
-                </p>
-                <a class="btn btn-primary" href="/blogs/<%=blog._id%>">View <%=blog.title%></a>
+                <h5 class="card-title"><%= blog.title%></h5>
+                <p class="card-text"><%= blog.description%></p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item text-muted"><%= blog.mood%></li>
+            </ul>
+            <div class="card-body">
+                <a class="card-link btn btn-info" href="/blogs/<%=blog._id%>/edit">Edit</a>
+                <form class="d-inline" action="/blogs/<%=blog._id%>?_method=DELETE" method="POST">
+                    <button class="btn btn-danger">Delete</button>
+                </form>
+            </div>
+            <div class="card-footer text-muted">
+                2 days ago
             </div>
         </div>
     </div>
 </div>
-<% }%>

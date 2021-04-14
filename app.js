@@ -39,10 +39,15 @@ app.get('/blogs/new',(req,res) => {
     res.render('blogs/new');
 })
 
-app.post('/blogs', async (req,res) => {
-    const blog = new Blog(req.body.blog);
-    await blog.save();
-    res.redirect(`/blogs/${blog._id}`);
+app.post('/blogs', async (req,res,next) => {
+    try {
+        const blog = new Blog(req.body.blog);
+        await blog.save();
+        res.redirect(`/blogs/${blog._id}`);
+    } catch(e) {
+        next(e);
+    }
+    
 })
 
 app.get('/blogs/:id', async (req,res) => {
@@ -65,6 +70,10 @@ app.delete('/blogs/:id', async (req, res) => {
     const { id } = req.params;
     await Blog.findByIdAndDelete(id);
     res.redirect('/blogs');
+})
+
+app.use((err,req,res,next)=> {
+    res.send('UH OH...')
 })
 
 app.listen(3000, () => {
