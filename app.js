@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
 const ejsMate = require('ejs-mate');
+const catchAsync = require('./utilities/catchAsync');
 const methodOverride = require('method-override');
 const Blog = require('./models/blog');
 
@@ -30,47 +31,43 @@ app.get('/', (req, res) => {
     res.render('home')
 })
  
-app.get('/blogs', async(req,res) => {
+app.get('/blogs',catchAsync( async(req,res) => {
     const blogs = await Blog.find({});
     res.render('blogs/index',{blogs})
-})
+}))
 
 app.get('/blogs/new',(req,res) => {
     res.render('blogs/new');
 })
 
-app.post('/blogs', async (req,res,next) => {
-    try {
-        const blog = new Blog(req.body.blog);
-        await blog.save();
-        res.redirect(`/blogs/${blog._id}`);
-    } catch(e) {
-        next(e);
-    }
+app.post('/blogs', catchAsync( async (req,res,next) => {
+    const blog = new Blog(req.body.blog);
+    await blog.save();
+    res.redirect(`/blogs/${blog._id}`);
     
-})
+}))
 
-app.get('/blogs/:id', async (req,res) => {
+app.get('/blogs/:id', catchAsync(async (req,res) => {
     const blog = await Blog.findById(req.params.id)
     res.render('blogs/show', {blog});
-})
+}))
 
-app.get('/blogs/:id/edit', async (req, res) => {
+app.get('/blogs/:id/edit', catchAsync(async (req, res) => {
     const blog = await Blog.findById(req.params.id)
     res.render('blogs/edit', { blog });
-})
+}))
  
-app.put('/blogs/:id', async (req, res) => {
+app.put('/blogs/:id',catchAsync( async (req, res) => {
     const { id } = req.params;
     const blog = await Blog.findByIdAndUpdate(id, { ...req.body.blog });
     res.redirect(`/blogs/${blog._id}`)
-});
+}));
 
-app.delete('/blogs/:id', async (req, res) => {
+app.delete('/blogs/:id', catchAsync(async (req, res) => {
     const { id } = req.params;
     await Blog.findByIdAndDelete(id);
     res.redirect('/blogs');
-})
+}))
 
 app.use((err,req,res,next)=> {
     res.send('UH OH...')
