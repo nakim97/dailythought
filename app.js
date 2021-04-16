@@ -2,10 +2,15 @@ const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
 const ejsMate = require('ejs-mate');
+const {
+    blogSchema
+} = require('./schemas.js');
 const catchAsync = require('./utilities/catchAsync');
 const ExpressError = require('./utilities/ExpressError');
 const methodOverride = require('method-override');
 const Blog = require('./models/blog');
+
+
 
 mongoose.connect('mongodb://localhost:27017/mythoughts', {
     useNewUrlParser: true,
@@ -30,6 +35,18 @@ app.use(express.urlencoded({
 }));
 app.use(methodOverride('_method'));
 
+const validateBlog = (req, res, next) => {
+    const {
+        error
+    } = blogSchema.validate(req.body);
+    if (error) {
+        const msg = error.details.map(el => el.message).join(',')
+        throw new ExpressError(msg, 400)
+    } else {
+        next();
+    }
+}
+
 app.get('/', (req, res) => {
     res.render('home')
 })
@@ -45,8 +62,8 @@ app.get('/blogs/new', (req, res) => {
     res.render('blogs/new');
 })
 
-app.post('/blogs', catchAsync(async (req, res, next) => {
-    if (!req.body.blog) throw new ExpressError('Invalid', 400);
+app.post('/blogs', validateBlog, catchAsync(async (req, res, next) => {
+    //if (!req.body.blog) throw new ExpressError('Invalid', 400);
     const blog = new Blog(req.body.blog);
     await blog.save();
     res.redirect(`/blogs/${blog._id}`);
@@ -67,7 +84,7 @@ app.get('/blogs/:id/edit', catchAsync(async (req, res) => {
     });
 }))
 
-app.put('/blogs/:id', catchAsync(async (req, res) => {
+app.put('/blogs/:id', validateBlog, catchAsync(async (req, res) => {
     const {
         id
     } = req.params;
@@ -90,9 +107,13 @@ app.all('*', (req, res, next) => {
 })
 
 app.use((err, req, res, next) => {
-    const { statusCode = 500 } = err;
+    const {
+        statusCode = 500
+    } = err;
     if (!err.message) err.message = 'Oh No, Something Went Wrong!'
-    res.status(statusCode).render('error', { err })
+    res.status(statusCode).render('error', {
+        err
+    })
 })
 
 app.listen(3000, () => {
