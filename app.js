@@ -11,7 +11,8 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const User = require('./models/user');
 
-const blogs = require('./routes/blogs');
+const userRoutes = require('./routes/users');
+const blogRoutes = require('./routes/blogs');
 
 mongoose.connect('mongodb://localhost:27017/mythoughts', {
     useNewUrlParser: true,
@@ -64,8 +65,8 @@ app.use((req, res, next) => {
     next();
 })
 
-
-app.use('/blogs', blogs)
+app.use('/', userRoutes);
+app.use('/blogs', blogRoutes)
 
 app.get('/', (req, res) => {
     res.render('home')
