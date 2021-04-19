@@ -5,7 +5,7 @@ const catchAsync = require('../utilities/catchAsync');
 const {
     blogSchema
 } = require('../schemas.js');
-
+const {isLoggedIn} = require('../middleware');
 const ExpressError = require('../utilities/ExpressError');
 const Blog = require('../models/blog');
 
@@ -28,11 +28,11 @@ router.get('/', catchAsync(async (req, res) => {
     })
 }))
 
-router.get('/new', (req, res) => {
+router.get('/new', isLoggedIn,(req, res) => {
     res.render('blogs/new');
 })
 
-router.post('/', validateBlog, catchAsync(async (req, res, next) => {
+router.post('/', isLoggedIn, validateBlog, catchAsync(async (req, res, next) => {
     const blog = new Blog(req.body.blog);
     await blog.save();
     req.flash('success', 'Successfully made a new post!');
@@ -50,7 +50,7 @@ router.get('/:id', catchAsync(async (req, res) => {
     });
 }))
 
-router.get('/:id/edit', catchAsync(async (req, res) => {
+router.get('/:id/edit', isLoggedIn, catchAsync(async (req, res) => {
     const blog = await Blog.findById(req.params.id)
     if (!blog) {
         req.flash('error', 'Uh Oh...Cannot find that post');
@@ -61,7 +61,7 @@ router.get('/:id/edit', catchAsync(async (req, res) => {
     });
 }))
 
-router.put('/:id', validateBlog, catchAsync(async (req, res) => {
+router.put('/:id', isLoggedIn, validateBlog, catchAsync(async (req, res) => {
     const {
         id
     } = req.params;
@@ -72,7 +72,7 @@ router.put('/:id', validateBlog, catchAsync(async (req, res) => {
     res.redirect(`/blogs/${blog._id}`)
 }));
 
-router.delete('/:id', catchAsync(async (req, res) => {
+router.delete('/:id', isLoggedIn, catchAsync(async (req, res) => {
     const {
         id
     } = req.params;
