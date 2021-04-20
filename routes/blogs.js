@@ -40,7 +40,7 @@ router.post('/', isLoggedIn, validateBlog, catchAsync(async (req, res, next) => 
 }))
 
 router.get('/:id', catchAsync(async (req, res) => {
-    const blog = await Blog.findById(req.params.id)
+    const blog = await Blog.findById(req.params.id).populate('comments');
     if (!blog) {
         req.flash('error', 'Uh Oh...Cannot find that post');
         return res.redirect('/blogs');

@@ -8,3 +8,9 @@ module.exports.blogSchema = Joi.object({
         description: Joi.string().required()
     }).required()
 });
+
+module.exports.commentSchema = Joi.object({
+    comment: Joi.object({
+        body: Joi.string().required()
+    }).required()
+})

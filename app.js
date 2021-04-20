@@ -13,6 +13,7 @@ const User = require('./models/user');
 
 const userRoutes = require('./routes/users');
 const blogRoutes = require('./routes/blogs');
+const commentRoutes = require('./routes/comments');
 
 mongoose.connect('mongodb://localhost:27017/mythoughts', {
     useNewUrlParser: true,
@@ -68,6 +69,7 @@ app.use((req, res, next) => {
 
 app.use('/', userRoutes);
 app.use('/blogs', blogRoutes)
+app.use('/blogs/:id/comments', commentRoutes)
 
 app.get('/', (req, res) => {
     res.render('home')
