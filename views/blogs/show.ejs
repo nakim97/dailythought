@@ -10,6 +10,7 @@
             </div>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item text-muted"><%= blog.mood%></li>
+                <li class="list-group-item">Submitted by <%= blog.author.username%></li>
             </ul>
             <div class="card-body">
                 <a class="card-link btn btn-info" href="/blogs/<%=blog._id%>/edit">Edit</a>

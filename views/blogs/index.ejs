@@ -16,6 +16,7 @@
                 <p class="card-text"><%= blog.description %></p>
                 <p class="card-text">
                     <small class="text-muted"><%= blog.mood%></small>
+                    <small class="text-muted"><%=blog.author%></small>
                 </p>
                 <a class="btn btn-primary" href="/blogs/<%=blog._id%>">View <%=blog.title%></a>
             </div>

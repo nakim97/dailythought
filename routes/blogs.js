@@ -34,13 +34,15 @@ router.get('/new', isLoggedIn,(req, res) => {
 
 router.post('/', isLoggedIn, validateBlog, catchAsync(async (req, res, next) => {
     const blog = new Blog(req.body.blog);
+    blog.author = req.user._id;
     await blog.save();
     req.flash('success', 'Successfully made a new post!');
     res.redirect(`/blogs/${blog._id}`);
 }))
 
 router.get('/:id', catchAsync(async (req, res) => {
-    const blog = await Blog.findById(req.params.id).populate('comments');
+    const blog = await Blog.findById(req.params.id).populate('comments').populate('author');
+    console.log(blog);
     if (!blog) {
         req.flash('error', 'Uh Oh...Cannot find that post');
         return res.redirect('/blogs');
