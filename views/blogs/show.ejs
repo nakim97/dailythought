@@ -12,12 +12,14 @@
                 <li class="list-group-item text-muted"><%= blog.mood%></li>
                 <li class="list-group-item">Submitted by <%= blog.author.username%></li>
             </ul>
+            <%  if( currentUser && blog.author.equals(currentUser._id))  {%>
             <div class="card-body">
                 <a class="card-link btn btn-info" href="/blogs/<%=blog._id%>/edit">Edit</a>
                 <form class="d-inline" action="/blogs/<%=blog._id%>?_method=DELETE" method="POST">
                     <button class="btn btn-danger">Delete</button>
                 </form>
             </div>
+            <% } %>
             <div class="card-footer text-muted">
                 2 days ago
             </div>
