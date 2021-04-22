@@ -2,16 +2,20 @@ const express = require('express');
 const router = express.Router({
     mergeParams: true
 });
-const {validateComment} = require('../middleware');
+const {
+    validateComment,
+    isLoggedIn,isCommentAuthor
+} = require('../middleware');
 const Blog = require('../models/blog');
 const Comment = require('../models/comment');
 
 const ExpressError = require('../utilities/ExpressError');
 const catchAsync = require('../utilities/catchAsync');
 
-router.post('/', validateComment, catchAsync(async (req, res) => {
+router.post('/', validateComment, isLoggedIn, catchAsync(async (req, res) => {
     const blog = await Blog.findById(req.params.id);
     const comment = new Comment(req.body.comment);
+    comment.author = req.user._id;
     blog.comments.push(comment);
     await comment.save();
     await blog.save();
@@ -19,7 +23,7 @@ router.post('/', validateComment, catchAsync(async (req, res) => {
     res.redirect(`/blogs/${blog._id}`);
 }))
 
-router.delete('/:commentId', catchAsync(async (req, res) => {
+router.delete('/:commentId', isLoggedIn, isCommentAuthor, catchAsync(async (req, res) => {
     const {
         id,
         commentId

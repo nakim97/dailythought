@@ -27,6 +27,7 @@
     </div>
 
     <div class="col-6">
+        <% if(currentUser){ %>
         <h2>Add your Comment Here</h2>
         <form action="/blogs/<%=blog._id%>/comments" method="POST" class="mb-3 validated-form" novalidate>
             <div class="mb-3">
@@ -37,13 +38,17 @@
             </div>
             <button class="btn btn-success">Submit</button>
         </form>
+        <% } %>
         <% for(let comment of blog.comments) { %>
         <div class="card mb-3 ">
             <div class="card-body">
-                <p class="card-text">Comment: <%= comment.body %></p>
+                <h5 class="card-title"> <%= comment.author.username %></h5>
+                <p class="card-text"><%= comment.body %></p>
+                <%  if( currentUser && comment.author.equals(currentUser._id))  {%>
                 <form action="/blogs/<%=blog._id%>/comments/<%=comment._id%>?_method=DELETE" method="POST">
                     <button class="btn btn-sm btn-danger">Delete</button>
                 </form>
+                <% } %>
             </div>
         </div>
         <% } %>
