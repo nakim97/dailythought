@@ -1,25 +1,9 @@
 const express = require('express');
 const router = express.Router();
-
 const catchAsync = require('../utilities/catchAsync');
-const {
-    blogSchema
-} = require('../schemas.js');
-const {isLoggedIn} = require('../middleware');
-const ExpressError = require('../utilities/ExpressError');
+const {isLoggedIn, isAuthor, validateBlog} = require('../middleware');
 const Blog = require('../models/blog');
 
-const validateBlog = (req, res, next) => {
-    const {
-        error
-    } = blogSchema.validate(req.body);
-    if (error) {
-        const msg = error.details.map(el => el.message).join(',')
-        throw new ExpressError(msg, 400)
-    } else {
-        next();
-    }
-}
 
 router.get('/', catchAsync(async (req, res) => {
     const blogs = await Blog.find({});
@@ -42,7 +26,6 @@ router.post('/', isLoggedIn, validateBlog, catchAsync(async (req, res, next) => 
 
 router.get('/:id', catchAsync(async (req, res) => {
     const blog = await Blog.findById(req.params.id).populate('comments').populate('author');
-    console.log(blog);
     if (!blog) {
         req.flash('error', 'Uh Oh...Cannot find that post');
         return res.redirect('/blogs');
@@ -52,29 +35,27 @@ router.get('/:id', catchAsync(async (req, res) => {
     });
 }))
 
-router.get('/:id/edit', isLoggedIn, catchAsync(async (req, res) => {
-    const blog = await Blog.findById(req.params.id)
+router.get('/:id/edit', isLoggedIn, isAuthor, catchAsync(async (req, res) => {
+    const {id} = req.params;
+    const blog = await Blog.findById(id)
     if (!blog) {
         req.flash('error', 'Uh Oh...Cannot find that post');
         return res.redirect('/blogs');
     }
+  
     res.render('blogs/edit', {
         blog
     });
 }))
 
-router.put('/:id', isLoggedIn, validateBlog, catchAsync(async (req, res) => {
-    const {
-        id
-    } = req.params;
-    const blog = await Blog.findByIdAndUpdate(id, {
-        ...req.body.blog
-    });
+router.put('/:id', isLoggedIn, isAuthor,validateBlog, catchAsync(async (req, res) => {
+    const {id} = req.params;
+    const blog = await Blog.findByIdAndUpdate(id, {...req.body.blog});
     req.flash('success', 'Successfully updated post');
     res.redirect(`/blogs/${blog._id}`)
 }));
 
-router.delete('/:id', isLoggedIn, catchAsync(async (req, res) => {
+router.delete('/:id', isLoggedIn, isAuthor, catchAsync(async (req, res) => {
     const {
         id
     } = req.params;

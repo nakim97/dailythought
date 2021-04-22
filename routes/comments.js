@@ -2,31 +2,12 @@ const express = require('express');
 const router = express.Router({
     mergeParams: true
 });
-
+const {validateComment} = require('../middleware');
 const Blog = require('../models/blog');
 const Comment = require('../models/comment');
 
-const {
-    commentSchema
-} = require('../schemas.js');
-
-
 const ExpressError = require('../utilities/ExpressError');
 const catchAsync = require('../utilities/catchAsync');
-
-const validateComment = (req, res, next) => {
-    const {
-        error
-    } = commentSchema.validate(req.body);
-    if (error) {
-        const msg = error.details.map(el => el.message).join(',')
-        throw new ExpressError(msg, 400)
-    } else {
-        next();
-    }
-}
-
-
 
 router.post('/', validateComment, catchAsync(async (req, res) => {
     const blog = await Blog.findById(req.params.id);
