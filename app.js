@@ -10,6 +10,7 @@ const methodOverride = require('method-override');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const User = require('./models/user');
+const helmet = require('helmet');
 
 const mongoSanitize = require('express-mongo-sanitize');
 
@@ -46,18 +47,59 @@ app.use(mongoSanitize({
 }))
 
 const sessionConfig = {
+    name: 'session',
     secret: 'thisisasecret',
     resave: false,
     saveUninitialized: true,
     cookie: {
         httpOnly: true,
+        // secure: true,
         expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
         maxAge: 1000 * 60 * 60 * 24 * 7
     }
 }
 app.use(session(sessionConfig))
 app.use(flash());
+app.use(helmet());
 
+const scriptSrcUrls = [
+    "https://stackpath.bootstrapcdn.com/",
+    "https://kit.fontawesome.com/",
+    "https://cdnjs.cloudflare.com/",
+    "https://cdn.jsdelivr.net",
+];
+const styleSrcUrls = [
+    "https://kit-free.fontawesome.com/",
+    "https://stackpath.bootstrapcdn.com/",
+    "https://fonts.googleapis.com/",
+    "https://use.fontawesome.com/",
+    "https://cdn.jsdelivr.net/",
+    "https://use.fontawesome.com/",
+    "https://cdnjs.cloudflare.com/",
+];
+const fontSrcUrls = [
+    "https://fonts.gstatic.com/",
+    "https://cdn.jsdelivr.net/",
+    "https://use.fontawesome.com/",
+    "https://cdnjs.cloudflare.com/",
+];
+app.use(
+    helmet.contentSecurityPolicy({
+        directives: {
+            defaultSrc: [],
+            scriptSrc: ["'unsafe-inline'", "'self'", ...scriptSrcUrls],
+            styleSrc: ["'self'", "'unsafe-inline'", ...styleSrcUrls],
+            workerSrc: ["'self'", "blob:"],
+            objectSrc: [],
+            imgSrc: [
+                "'self'",
+                "blob:",
+                "data:"
+            ],
+            fontSrc: ["'self'", ...fontSrcUrls],
+        },
+    })
+);
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
