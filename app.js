@@ -99,10 +99,10 @@ const styleSrcUrls = [
     "https://cdnjs.cloudflare.com/",
 ];
 const connectSrcUrls = [
-    "https://api.mapbox.com/",
-    "https://a.tiles.mapbox.com/",
-    "https://b.tiles.mapbox.com/",
-    "https://events.mapbox.com/",
+    "https://api.mapbox.com",
+    "https://*.tiles.mapbox.com",
+    "https://events.mapbox.com",
+    "https://ka-f.fontawesome.com"
 ];
 
 const fontSrcUrls = [
