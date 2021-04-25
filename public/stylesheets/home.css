@@ -38,7 +38,6 @@ i{
   border-radius: 40px;
   background: #f8f8f8;
   height: 500px;
-  margin-bottom: 200px;
   box-shadow: 14px 13px 20px #cbced1, -13px -13px 20px #ffffff;
 }
 
@@ -60,4 +59,10 @@ i{
   box-shadow: inset -10px -10px 30px rgba(255, 255, 255, 1),
   inset 10px 5px 20px rgba(0, 0, 0, 0.05);
   
+}
+#foot{
+  color:black;
+}
+i{
+  cursor:pointer;
 }
