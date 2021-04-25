@@ -1,0 +1,22 @@
+*{
+    font-family: 'Roboto Mono', monospace;
+}
+
+.bubbles{
+    text-align: center;
+    
+}
+
+.bubbles img{
+    margin-right: 20px;
+}
+
+#btn{
+    margin-top:30px;
+}
+
+#btn{
+
+    border: 2px solid black;
+    color:black;
+  }

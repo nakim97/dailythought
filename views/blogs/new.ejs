@@ -1,4 +1,5 @@
 <% layout('layouts/boilerplate')%>
+<link rel="stylesheet" href="/stylesheets/new.css">
 <div class="row">
     <h1 class="text-center">New Thought</h1>
     <div class="col-6 offset-3">
@@ -11,20 +12,6 @@
                 </div>
             </div>
             <div class="mb-3">
-                <label class="form-label" for="mood">Mood</label>
-                <input class="form-control" type="text" id="location" name="blog[mood]" required>
-                <div class="valid-feedback">
-                    Looks good!
-                </div>
-            </div>
-            <div class="mb-3">
-                <label class="form-label" for="image">Image Url</label>
-                <input class="form-control" type="text" id="image" name="blog[image]">
-                <div class="valid-feedback">
-                    Looks good!
-                </div>
-            </div>
-            <div class="mb-3">
                 <label class="form-label" for="description">Description</label>
                 <textarea class="form-control" type="text" id="description" name="blog[description]"
                     required></textarea>
@@ -32,10 +19,34 @@
                     Looks good!
                 </div>
             </div>
+            
             <div class="mb-3">
-                <button class="btn btn-success">Add Thought</button>
+                <p>Select your mood:</p>
+                <div class="bubbles">
+                    <input type="radio" id="happy" value="happy" name="blog[bubble]">
+                <label for="happy"> <img src="/images/happy.png" width="auto" height="100px"></label> 
+
+                <input type="radio" id="laugh" value="laugh"  name="blog[bubble]">
+                <label for="laugh"> <img src="/images/laugh.png" width="auto" height="100px"></label> 
+
+                <input type="radio" id="love" value="love" name="blog[bubble]">
+                <label for="love"> <img src="/images/love.png"width="auto" height="100px"></label><br>
+
+                <input type="radio" id="mad" value="mad" name="blog[bubble]">
+                <label for="mad"> <img src="/images/mad.png"width="auto" height="100px"></label> 
+
+                <input type="radio" id="sad" value="sad" name="blog[bubble]">
+                <label for="sad"> <img src="/images/sad.png"width="auto" height="100px"></label>
+
+                <input type="radio" id="shock" value="shock" name="blog[bubble]">
+                <label for="shock"> <img src="/images/shock.png" width="auto" height="100px"></label> 
+
+                </div>
+                
+            </div>
+            <div class="mb-3 text-center">
+                <button class="btn " id="btn">Add Thought</button>
             </div>
         </form>
-        <a href="/blogs">All Thoughts</a>
     </div>
 </div>

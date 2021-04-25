@@ -5,8 +5,8 @@ const Schema = mongoose.Schema;
 const BlogSchema = new Schema({
     title: String,
     image: String,
-    mood: String,
     description: String,
+    bubble: String,
     author: {
         type: Schema.Types.ObjectId,
         ref: 'User'

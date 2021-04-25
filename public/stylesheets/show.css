@@ -1,0 +1,17 @@
+*{
+    font-family: 'Roboto Mono', monospace;
+    color: black;
+}
+
+#editBtn,.submitbtn{
+    border: 1px solid black;
+    color:black;
+    background-color: white;
+}
+
+.card-body{
+    text-align: left;
+}
+h2{
+    margin-bottom: 20px;
+}

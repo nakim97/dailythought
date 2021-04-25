@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="/stylesheets/edit.css">
 <% layout('layouts/boilerplate')%>
 <div class="row">
     <h1 class="text-center">Edit Thought</h1>
@@ -10,20 +11,32 @@
                     Looks good!
                 </div>
             </div>
+
             <div class="mb-3">
-                <label class="form-label" for="image">Image Url</label>
-                <input class="form-control" type="text" id="image" name="blog[image]" value="<%=blog.image %>" required>
-                <div class="valid-feedback">
-                    Looks good!
+                <p>Select your mood:</p>
+                <div class="bubbles">
+                    <input type="radio" id="happy" value="happy" name="blog[bubble]" value="<%=blog.bubble %>" required>
+                    <label for="happy"> <img src="/images/happy.png" width="auto" height="100px"></label>
+
+                    <input type="radio" id="laugh" value="laugh" name="blog[bubble]" value="<%=blog.bubble %>" required>
+                    <label for="laugh"> <img src="/images/laugh.png" width="auto" height="100px"></label>
+
+                    <input type="radio" id="love" value="love" name="blog[bubble]" value="<%=blog.bubble %>" required>
+                    <label for="love"> <img src="/images/love.png" width="auto" height="100px"></label><br>
+
+                    <input type="radio" id="mad" value="mad" name="blog[bubble]" value="<%=blog.bubble %>" required>
+                    <label for="mad"> <img src="/images/mad.png" width="auto" height="100px"></label>
+
+                    <input type="radio" id="sad" value="sad" name="blog[bubble]" value="<%=blog.bubble %>" required>
+                    <label for="sad"> <img src="/images/sad.png" width="auto" height="100px"></label>
+
+                    <input type="radio" id="shock" value="shock" name="blog[bubble]" value="<%=blog.bubble %>" required>
+                    <label for="shock"> <img src="/images/shock.png" width="auto" height="100px"></label>
                 </div>
+
+
             </div>
-            <div class="mb-3">
-                <label class="form-label" for="mood">Mood</label>
-                <input class="form-control" type="text" id="mood" name="blog[mood]" value="<%=blog.mood %>" required>
-                <div class="valid-feedback">
-                    Looks good!
-                </div>
-            </div>
+
 
             <div class="mb-3">
                 <label class="form-label" for="description">Description</label>
@@ -33,10 +46,9 @@
                     Looks good!
                 </div>
             </div>
-            <div class="mb-3">
-                <button class="btn btn-info">Update Thought</button>
+            <div class="mb-3 text-center">
+                <button class="btn">Update Thought</button>
             </div>
         </form>
-        <a href="/blogs/<%= blog._id%>">Back To Blog</a>
 
     </div>

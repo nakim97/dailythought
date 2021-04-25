@@ -1,24 +1,45 @@
 <% layout('layouts/boilerplate')%>
-
-<h1>All Your Thoughts</h1>
-<div>
-    <a href="/blogs/new">Add a Thought</a>
+<link rel="stylesheet" href="/stylesheets/index.css">
+<h1>Trending Thoughts</h1>
+<div class="add-thought">
+    <a class="btn" href="/blogs/new">Add a Thought</a>
 </div>
 <% for (let blog of blogs){%>
-<div class="card mb-3">
-    <div class="row">
-        <div class="col-md-4">
-            <img class="img-fluid" alt="" src="<%=blog.image%>">
+<div class="container" >
+    <div class="row mb-4">
+        <div class="col px-0">
+            <% if(blog.bubble == 'happy'){%>
+                <img src="/images/happy.png" width="150px">
+                <%}%>
+                                
+                    <% if(blog.bubble == 'laugh'){%>
+                <img src="/images/laugh.png" width="auto" height="150px">
+                <%}%>
+                                
+                    <% if(blog.bubble == 'love'){%>
+                <img src="/images/love.png" width="auto" height="150px">
+                <%}%>
+                                
+                     <% if(blog.bubble == 'mad'){%>
+                <img src="/images/mad.png" width="auto" height="150px">
+                <%}%>
+                                
+                     <% if(blog.bubble == 'sad'){%>
+                <img src="/images/sad.png" width="auto" height="150px">
+                <%}%>
+                                
+                    <% if(blog.bubble == 'shock'){%>
+                <img src="/images/shock.png" width="auto" height="150px">
+                <%}%>
         </div>
-        <div class="col-md-8">
+        <div class="col px-0">
             <div class="card-body">
                 <h5 class="card-title"><%= blog.title %> </h5>
                 <p class="card-text"><%= blog.description %></p>
+                <a class="btn" href="/blogs/<%=blog._id%>">View</a>
                 <p class="card-text">
-                    <small class="text-muted"><%= blog.mood%></small>
-                    <small class="text-muted"><%=blog.author%></small>
+                    <small class="text-muted"> # <%= blog.bubble%></small>
                 </p>
-                <a class="btn btn-primary" href="/blogs/<%=blog._id%>">View <%=blog.title%></a>
             </div>
         </div>
     </div>

@@ -31,7 +31,6 @@ router.get('/:id', catchAsync(async (req, res) => {
             path: 'author'
         }
     }).populate('author');
-    console.log(blog);
 
     if (!blog) {
         req.flash('error', 'Uh Oh...Cannot find that post');

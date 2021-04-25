@@ -1,32 +1,58 @@
 <% layout('layouts/boilerplate')%>
-
+<link rel="stylesheet" href="/stylesheets/show.css">
 <div class="row">
     <div class="col-6">
         <div class="card mb-3">
-            <img src="<%= blog.image%>" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title"><%= blog.title%></h5>
+            <div class="mood text-center">
+
+                <% if(blog.bubble == 'happy'){%>
+                <img src="/images/happy.png" width="150px">
+                <%}%>
+                                
+                    <% if(blog.bubble == 'laugh'){%>
+                <img src="/images/laugh.png" width="auto" height="150px">
+                <%}%>
+                                
+                    <% if(blog.bubble == 'love'){%>
+                <img src="/images/love.png" width="auto" height="150px">
+                <%}%>
+                                
+                     <% if(blog.bubble == 'mad'){%>
+                <img src="/images/mad.png" width="auto" height="150px">
+                <%}%>
+                                
+                     <% if(blog.bubble == 'sad'){%>
+                <img src="/images/sad.png" width="auto" height="150px">
+                <%}%>
+                                
+                    <% if(blog.bubble == 'shock'){%>
+                <img src="/images/shock.png" width="auto" height="150px">
+                <%}%>
+            </div>
+           
+
+            <div class="card-body text-center">
+                <h5 class="card-title "><%= blog.title%></h5>
                 <p class="card-text"><%= blog.description%></p>
             </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item text-muted"><%= blog.mood%></li>
+            <ul class="list-group list-group-flush text-center">
                 <li class="list-group-item">Submitted by <%= blog.author.username%></li>
             </ul>
             <%  if( currentUser && blog.author.equals(currentUser._id))  {%>
-            <div class="card-body">
-                <a class="card-link btn btn-info" href="/blogs/<%=blog._id%>/edit">Edit</a>
+            <div class="card-body text-center">
+                <a class="card-link btn" id="editBtn" href="/blogs/<%=blog._id%>/edit">Edit</a>
                 <form class="d-inline" action="/blogs/<%=blog._id%>?_method=DELETE" method="POST">
                     <button class="btn btn-danger">Delete</button>
                 </form>
             </div>
+           
             <% } %>
-            <div class="card-footer text-muted">
-                2 days ago
-            </div>
         </div>
     </div>
 
-    <div class="col-6">
+
+
+    <div class="col-6 text-center">
         <% if(currentUser){ %>
         <h2>Add your Comment Here</h2>
         <form action="/blogs/<%=blog._id%>/comments" method="POST" class="mb-3 validated-form" novalidate>
@@ -36,17 +62,17 @@
                     Looks good!
                 </div>
             </div>
-            <button class="btn btn-success">Submit</button>
+            <button class="submitbtn">Submit</button>
         </form>
         <% } %>
         <% for(let comment of blog.comments) { %>
-        <div class="card mb-3 ">
+        <div class="card mb-3">
             <div class="card-body">
-                <h5 class="card-title"> <%= comment.author.username %></h5>
+                <h5 class="card-title"> <%= comment.author.username %>: </h5>
                 <p class="card-text"><%= comment.body %></p>
                 <%  if( currentUser && comment.author.equals(currentUser._id))  {%>
                 <form action="/blogs/<%=blog._id%>/comments/<%=comment._id%>?_method=DELETE" method="POST">
-                    <button class="btn btn-sm btn-danger">Delete</button>
+                    <button class="btn btn-sm btn-danger" id="deleteBtn">Delete</button>
                 </form>
                 <% } %>
             </div>

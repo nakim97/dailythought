@@ -1,0 +1,36 @@
+h1{
+    text-align:center;
+    margin-bottom: 20px;
+}
+
+.add-thought{
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.container{
+    text-align: center;
+    
+}
+
+.row{
+    border: 12px  #cbcde1;
+    box-shadow: 14px 13px 40px #cbced1, -13px -13px 30px #ffffff;
+}
+
+.card-body{
+    text-align: left;
+}
+
+.btn{
+    border: 1px solid black;
+    color:black;
+    margin-bottom: 10px;
+  }
+
+  .add-thought{
+      color:black;
+  }
+  body{
+    font-family: 'Roboto Mono', monospace;
+  }

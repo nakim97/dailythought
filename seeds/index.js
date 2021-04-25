@@ -21,8 +21,9 @@ const seedDB = async () => {
     await Blog.deleteMany({});
     const blog = new Blog({
         author: '607ce566a946373b7453b339',
+        username: 'itme',
         title: 'boii',
-        mood: 'the answer is yes',
+        bubble: 'https://res.cloudinary.com/douqbebwk/image/upload/v1600060601/YelpCamp/ahfnenvca4tha00h2ubt.png',
         description: 'k',
     })
     await blog.save();
