@@ -3,3 +3,13 @@
     color: black;
     font-family: 'Roboto Mono', monospace;
 }
+
+i{
+    color:black;
+    text-decoration: none;
+    outline:none;
+}
+
+i:focus{
+    outline:none;
+}
