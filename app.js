@@ -1,6 +1,7 @@
 if (process.env.NODE_ENV !== "production") {
     require('dotenv').config();
 }
+
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
@@ -97,6 +98,13 @@ const styleSrcUrls = [
     "https://use.fontawesome.com/",
     "https://cdnjs.cloudflare.com/",
 ];
+const connectSrcUrls = [
+    "https://api.mapbox.com/",
+    "https://a.tiles.mapbox.com/",
+    "https://b.tiles.mapbox.com/",
+    "https://events.mapbox.com/",
+];
+
 const fontSrcUrls = [
     "https://fonts.gstatic.com/",
     "https://cdn.jsdelivr.net/",
@@ -107,6 +115,7 @@ app.use(
     helmet.contentSecurityPolicy({
         directives: {
             defaultSrc: [],
+            connectSrc: ["'self'", ...connectSrcUrls],
             scriptSrc: ["'unsafe-inline'", "'self'", ...scriptSrcUrls],
             styleSrc: ["'self'", "'unsafe-inline'", ...styleSrcUrls],
             workerSrc: ["'self'", "blob:"],
@@ -158,5 +167,5 @@ app.use((err, req, res, next) => {
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
-    console.log(`Serving on port ${port}`);
+    console.log(`Serving on port ${port}`)
 })
