@@ -14,7 +14,7 @@ HTML, CSS, JavaScript, EJS, BootStrap, MongoDB, Mongoose, Node.JS, Express, Pass
 
 ## License
 
-    Copyright [Stella Kim]
+    Copyright Stella Kim
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
