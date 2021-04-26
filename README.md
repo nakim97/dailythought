@@ -1,11 +1,21 @@
 # iThought
 A fullstack CRUD application with User Authentication/Authorization where users can post their thoughts,share with other users, and comment on eachother's posts. 
 
+## DEMO 
+https://ithoughtbot.herokuapp.com/ 
+
+Demo Account for trial purposes:
+
+Username: Demo
+
+Password: Demo
 
 ## Tech Stack
 Front End : HTML, CSS, JavaScript (EJS), BootStrap
 
 Back End: Node.js, Express.js, Mongoose, MongoDB, Passport, JOI
+
+Hosted on Heroku
 
 ## Features
 * [X] Users can sign up for a new account, log in, and log out
