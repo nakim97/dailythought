@@ -4,6 +4,7 @@ A fullstack CRUD application with User Authentication/Authorization where users 
 
 ## Tech Stack
 Front End : HTML, CSS, JavaScript (EJS), BootStrap
+
 Back End: Node.js, Express.js, Mongoose, MongoDB, Passport, JOI
 
 ## Features
