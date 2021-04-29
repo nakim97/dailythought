@@ -4,11 +4,11 @@ A fullstack CRUD application with User Authentication/Authorization where users 
 ## DEMO 
 https://ithoughtbot.herokuapp.com/ 
 
-Demo Account for trial purposes:
+Test trial account if you don't wish to create your own account:
 
-Username: Demo
+Username: demo
 
-Password: Demo
+Password: demo
 
 ## Tech Stack
 Front End : HTML, CSS, JavaScript (EJS), BootStrap
