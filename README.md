@@ -13,7 +13,7 @@ Password: demo
 ## Tech Stack
 Front End : HTML, CSS, JavaScript (EJS), BootStrap
 
-Back End: Node.js, Express.js, Mongoose, MongoDB, Passport, JOI
+Back End: Node.js, Express.js, Mongoose, MongoDB, Passport
 
 Hosted on Heroku
 
