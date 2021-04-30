@@ -20,8 +20,9 @@ Hosted on Heroku
 ## Features
 * [X] Users can sign up for a new account, log in, and log out
 * [X] Users can add a new post, edit/delete their own posts
+* [X] Users can select an emoji to depict their mood
 * [X] Users can add/edit/delete comments on posts
-* [X] Responsive website that includes user authentication, authorization, validation, security, and sanitization
+* [X] Responsive website that includes user authentication, authorization, validation, security measures, and HTML sanitization
 
 
 ## License
